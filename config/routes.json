@@ -19,7 +19,7 @@
     {
       "method": "POST",
       "path": "/pay",
-      "handler": "stripe.createPaymentIntent",
+      "handler": "stripe.createPayement",
       "config": {
         "policies": []
       }

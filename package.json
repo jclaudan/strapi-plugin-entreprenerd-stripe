@@ -1,6 +1,6 @@
 {
   "name": "strapi-v4-plugin-entreprenerd-stripe",
-  "version": "0.1.0",
+  "version": "0.4.1",
   "description": "Simple Plugin to Store Stripe Private Key and Use it to generate PaymentIntents",
   "strapi": {
     "name": "stripe",
@@ -8,9 +8,8 @@
     "description": "Simple Plugin to Store Stripe Private Key and Use it to generate PaymentIntents"
   },
   "dependencies": {
-    "@buffetjs/core": "^3.2.1",
-    "stripe": "^8.82.0",
-    "styled-components": "^5.1.1"
+    "@buffetjs/core": "^3.3.7",
+    "stripe": "^8.207.0"
   },
   "author": {
     "name": "Alex The Entreprenerd",

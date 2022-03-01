@@ -13,7 +13,7 @@ After installing you will have to rebuild your admin
 
 Alternatively drag this in the /plugins folder of your Strapi Install.
 
-Then go in Roles & Permissions -> stripe -> And set the createPaymentIntent controller to be public
+Then go in Roles & Permissions -> stripe -> And set the createPayement controller to be public
 
 ## Usage
 Add your Private Key in the Admin Panel
