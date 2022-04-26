@@ -21,7 +21,6 @@ const decoratorResponse = (data, error = null) => {
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
 
-// strapi.plugin('plugin-name').service('service-name')
 module.exports = ({ strapi }) => ({
   async getProductById(productId) {
     const pluginStore = strapi.store({
@@ -34,7 +33,6 @@ module.exports = ({ strapi }) => ({
       const pk = await pluginStore.get({key: 'pk'})
       const stripe = unitializedStripe(pk)
       const product = await stripe.products.retrieve(productId)
-      // strapi.log.http(`stripePlugin.getProduct: ${createdStripeProduct.success}  ${createdStripeProduct.error}`)
       return decoratorResponse(product)
   
     } catch (error) {
@@ -52,14 +50,7 @@ module.exports = ({ strapi }) => ({
     try {
       const pk = await pluginStore.get({key: 'pk'})
       const stripe = unitializedStripe(pk)
-    
-      // const templateProduct = {
-      //   name: 'T-shirt',
-      //   type: 'good',
-      // }
-      
       const createdProduct = await stripe.products.create(product)
-      // strapi.log.http(`stripePlugin.createProduct: ${createdStripeProduct.success}  ${createdStripeProduct.error}`)
       return decoratorResponse(createdProduct)
   
     } catch (error) {
@@ -116,14 +107,6 @@ module.exports = ({ strapi }) => ({
     try {
       const pk = await pluginStore.get({key: 'pk'})
       const stripe = unitializedStripe(pk)
-
-      // {
-      //   unit_amount: 2000,
-      //   currency: 'eur',
-      //   recurring: {interval: 'month'},
-      //   product: 'prod_LIKOgubzmujr5u',
-      // }
-      
 
       const createdPrice = await stripe.prices.create(price)
     

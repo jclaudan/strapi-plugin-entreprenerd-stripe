@@ -94,7 +94,7 @@ module.exports = {
     const pk = await pluginStore.get({key: 'pk'})
 
     const stripe = unitializedStripe(pk)
-    const cart = await strapi.db.query('api::cart.cart').findOne({ id: ctx.request.body.data.cartId })
+    const cart = await strapi.db.query('api::cart.cart').findOne({ where: { id: `${ctx.request.body.data.cartId}` } })
     const productsId = Object.keys(cart.content).map(key => key)
     const productList = await strapi.db.query('api::product.product')
       .findMany({
@@ -110,7 +110,7 @@ module.exports = {
         price: product.price.stripe_price_id,
         quantity: cart.content[product.id].quantity,
       }))
-    // console.log('ctx:createPayement:body:', cart.content, productList, ctx.request.body.data.cartId)
+
     const frontUrl = await pluginStore.get({ key: 'frontUrl' })
 
     const session = await stripe.checkout.sessions.create({
@@ -120,8 +120,7 @@ module.exports = {
       success_url: `${frontUrl}/success-payement`,
       cancel_url: `${frontUrl}/canceled-payement`,
     });
-    console.log('session::', session)
-    // session.id
+
     const createdOrder = await strapi.db.query('api::order.order').create({
       data: {
         status: 'pending',
@@ -129,16 +128,11 @@ module.exports = {
         email: ctx.request.body.data.email,
       },
     })
-    console.log('createdOrder::', createdOrder)
     ctx.send({ url: session.url })
   },
 
   stripeWebhook: async (ctx) => {
     const payload = ctx.request.body;
-    console.log('ctx.request:body::', ctx.request.body)
-    // console.log('ctx.request::', ctx.request)
-    console.log("Got payload data: ", payload.data);
-    // console.log("Got payload id: ", payload.data.object.id);
     await strapi.db.query('api::order.order').update({
       where: {
         stripe_session_id: payload.data.object.id,

@@ -1,6 +1,6 @@
 {
   "name": "strapi-v4-plugin-entreprenerd-stripe",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "Simple Plugin to Store Stripe Private Key and Use it to generate PaymentIntents",
   "strapi": {
     "name": "stripe",
